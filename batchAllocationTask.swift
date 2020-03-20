@@ -46,5 +46,5 @@ if orderedItems <= 0 {
    
 }
 else {
- print("holy shit")
+ print("Sorry stock Not avaiable for \(orderedItems)")
 }
