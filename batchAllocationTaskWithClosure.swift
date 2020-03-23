@@ -15,8 +15,7 @@ for size in 0..<allocationSize.count {
         products[allocationName[size]] = howManyCaseCanKeep
         products["avail"] = products["avail"] as! Int -  howManyCaseCanKeep * allocationSize[size]
         orderedItems = orderedItems - howManyCaseCanKeep * allocationSize[size]
-        }
-        else {
+        } else {
 
         orderedItems = orderedItems - howManyCaseCanKeepInThisBatch * allocationSize[size]
         products["avail"] = products["avail"] as! Int -  howManyCaseCanKeepInThisBatch * allocationSize[size]
