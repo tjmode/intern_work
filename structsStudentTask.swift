@@ -6,7 +6,7 @@ struct students{
    private let pythonMark: Int
    private let swiftMark: Int
    private let cMArk: Int
-   init (name: String, id: Int, email: String, pythonMark: Int, swiftMark: Int, cMArk: Int) { 
+   init (name: String, id: Int, email: String, pythonMark: Int, swiftMark: Int, cMArk: Int) {
        self.id = id
        self.name = name
        self.email = email
@@ -24,12 +24,21 @@ struct students{
         if failedStudents == [] {
             var rankholders = marks.reduce(0, +)
             rankList.append(rankholders)
-        } else {
         }
     }
+    func failureName() -> String {
+        let marks = [pythonMark,swiftMark,cMArk]
+        let failedStudents = marks.filter { $0 <= 44 }
+        if failedStudents != [] {
+            return name
+    }
+    else {
+        return ""
+    }
+}
 }
 var rankList = [Int]()
-let studentSheet = ["tony,1,email@emm.com,{python:67, swift:45, c:100}","yyy,1,@email.com,{python:67, swift:95, c:90}","zzz,1,email@email.com,{python:75, swift:55, c:80}"]
+let studentSheet = ["tony,1,email@emm.com,{python:67, swift:65, c:100}","yyy,1,dkd@email.com,{python:67, swift:95, c:90}","zzz,1,email@email.com,{python:75, swift:55, c:80}"]
 for eachStudentDataToSplit in studentSheet {
     let eachstudent = eachStudentDataToSplit.replacingOccurrences(of: "}", with: "")
     let nameAndId = eachstudent.components(separatedBy: ",")
@@ -47,8 +56,8 @@ for eachStudentDataToSplit in studentSheet {
         let checkingBeforeAt = email.components(separatedBy: "@")
         let checkingBeforeDot = checkingBeforeAt[1].components(separatedBy: ".")
             if checkingBeforeDot[0].count > 2 , checkingBeforeDot[1].count > 1 ,checkingBeforeAt[0].count > 2 {
-                    let ans =  students(name: nameAndId[0], id: Int(nameAndId[1]) ?? 0,email: nameAndId[2], pythonMark: Int(pythonMark[0]) ?? 0,swiftMark: Int(swiftMark[0]) ?? 0, cMArk: Int(cMark[0]) ?? 0)
-                        ans.rankListOfStudent()
+                    let ans = students(name: nameAndId[0], id: Int(nameAndId[1]) ?? 0,email: nameAndId[2], pythonMark: Int(pythonMark[0]) ?? 0,swiftMark: Int(swiftMark[0]) ?? 0, cMArk: Int(cMark[0]) ?? 0)
+                       print(ans.failureName())
         } 
         else{
             print("Sorry you entered wrong email for \(nameAndId[0])")
@@ -57,5 +66,7 @@ for eachStudentDataToSplit in studentSheet {
  }
 if rankList != [] {
     rankList.sort(by: >)
-    print(rankList)
-} 
+    for rank in 0..<rankList.count {
+        print("\(rank + 1) is for \(rankList[rank])")
+    }
+}
