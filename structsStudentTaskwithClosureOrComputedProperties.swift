@@ -1,12 +1,39 @@
-  
 import Foundation
 struct Students{
-     let name: String
+    static var rankHoldersMarkList = [Int]()
+    static var failureName = [String]()
+     private let name: String
      let id: Int
      let email: String
      let pythonMark: Int
      let swiftMark: Int
      let cMArk: Int
+     init (name: String ,id: Int,email: String,pythonMark: Int,swiftMark: Int,cMArk: Int) {
+       self.name = name
+       self.id = id
+       self.email = email
+       self.pythonMark = pythonMark
+       self.swiftMark = swiftMark
+       self.cMArk = cMArk
+     }
+         var failureName: String {
+        let marks = [pythonMark,swiftMark,cMArk]
+        let failedStudents = marks.filter { $0 <= 44 }
+        if failedStudents != [] {
+            Students.failureName.append(name)
+        }
+    return ""  
+    }
+    var rankList: String {
+        let marks = [pythonMark,swiftMark,cMArk]
+        let failedStudents = marks.filter { $0 <= 44 }
+        var rankholdersMark = 0
+        if failedStudents == [] {
+            rankholdersMark = marks.reduce(0, +)
+            Students.rankHoldersMarkList.append(rankholdersMark)
+            }
+            return ""
+        }
 }
 var rankHoldersMarkList = [Int]()
 let studentSheet = ["tony, 1, email@emm.com,{Python: 67, swift: 65, c: 46}",
@@ -33,31 +60,8 @@ for eachStudentDataToSplit in studentSheet {
         let checkingBeforeDot = checkingBeforeAt[1].components(separatedBy: ".")
             if checkingBeforeDot[0].count > 2 , checkingBeforeDot[1].count > 1 ,checkingBeforeAt[0].count > 2 {
                     let dataOfResult = Students(name: nameAndId[0], id: Int(nameAndId[1]) ?? 0,email: nameAndId[2], pythonMark: Int(pythonMark[0]) ?? 0,swiftMark: Int(swiftMark[0]) ?? 0, cMArk: Int(cMark[0]) ?? 0)
-                       //call here what list you needed
-                       let average = {
-                           var averageMark = ["\((dataOfResult.pythonMark + dataOfResult.swiftMark + dataOfResult.cMArk) / 3)","\(dataOfResult.id)"]
-                           print(averageMark)
-                       }
-                       //closure for ranklist
-                       let rankList = {
-                       let marks = [dataOfResult.pythonMark,dataOfResult.swiftMark,dataOfResult.cMArk]
-                       let failedStudents = marks.filter { $0 <= 44 }
-                       var rankholdersMark = 0
-                       if failedStudents == [] {
-                       rankholdersMark = marks.reduce(0, +)
-                       rankHoldersMarkList.append(rankholdersMark)
-                        }
-                       }
-                       // closure for failureName()
-                       let failureName = {
-                       let marks = [dataOfResult.pythonMark,dataOfResult.swiftMark,dataOfResult.cMArk]
-                       let failedStudents = marks.filter { $0 <= 44 }
-                       if failedStudents != [] {
-                                print(name}
-                        }
-                        
-                        
-            }
+                    dataOfResult.failureName
+                    dataOfResult.rankList            
         } else {
             print("Sorry you entered wrong email for \(nameAndId[0])")
         }
@@ -65,9 +69,3 @@ for eachStudentDataToSplit in studentSheet {
             print("Sorry you entered wrong email for \(nameAndId[0])")
         }
  }
-if rankHoldersMarkList != [] {
-    rankHoldersMarkList.sort(by: >)
-    for rank in 0..<rankHoldersMarkList.count {
-        print("\(rank + 1) is for \(rankHoldersMarkList[rank])")
-    }
-}
