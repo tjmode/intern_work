@@ -1,7 +1,16 @@
 import Foundation
 struct Students{
     static var rankHoldersMarkList = [Int]()
-    static var failureName = [String]()
+    {
+        didSet{
+         print(rankHoldersMarkList)
+     } 
+}
+    static var failureName = [String](){
+        didSet{
+         print(failureName)
+     } 
+}
      private let name: String
      let id: Int
      let email: String
@@ -16,6 +25,7 @@ struct Students{
        self.swiftMark = swiftMark
        self.cMArk = cMArk
      }
+
          var failureName: String {
         let marks = [pythonMark,swiftMark,cMArk]
         let failedStudents = marks.filter { $0 <= 44 }
@@ -24,10 +34,11 @@ struct Students{
         }
     return ""  
     }
-    var rankList: String {
+   var rankList: String {
         let marks = [pythonMark,swiftMark,cMArk]
         let failedStudents = marks.filter { $0 <= 44 }
         var rankholdersMark = 0
+        var temp = Students.rankHoldersMarkList
         if failedStudents == [] {
             rankholdersMark = marks.reduce(0, +)
             Students.rankHoldersMarkList.append(rankholdersMark)
@@ -35,7 +46,6 @@ struct Students{
             return ""
         }
 }
-var rankHoldersMarkList = [Int]()
 let studentSheet = ["tony, 1, email@emm.com,{Python: 67, swift: 65, c: 46}",
                     "yyy, 1, dkd@email.com,{python: 67, swift: 95, c: 90}",
                     "zzz, 1, email@email.com,{python: 75, swift: 55, c: 80}",
