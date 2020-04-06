@@ -1,0 +1,18 @@
+//creation of table
+create table example (text1 text, text2 text2);
+
+//insert into table hello
+insert into example (text1) values ('')
+
+// to select whole table
+SELECT d1 FROM example;
+
+// to select one column
+SELECT d1 FROM
+    datetime_text;
+
+//Int    
+CREATE TABLE example (text TEXT, int1 INTEGER);
+
+//for simple calc
+SELECT 1+2*8
