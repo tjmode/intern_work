@@ -1,4 +1,8 @@
-//logic_wrong
+                                                  
+                              // still not finish
+
+
+
 import Foundation
 var xo = [["x","o","x"],
           ["o",".","."],
