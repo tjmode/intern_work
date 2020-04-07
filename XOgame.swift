@@ -1,3 +1,4 @@
+//still error to clear
 import Foundation
 var xo = [["x",".","x"],
           ["x",".","x"],
