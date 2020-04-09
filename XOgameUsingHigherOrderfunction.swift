@@ -5,15 +5,14 @@
                                       // * if human move is x you need to change any dot into x in a XO array, and program will 
                                       //return xo array with O by replacing dot 
                                         // * now you need to replace with XO array with returned xo array and so on
-
 import Foundation
-var xo = [[".",".","."],
-          [".",".","."],
-          [".",".","."]
+var xo = [["x","o","o"],
+          ["o","o","x"],
+          ["x","x","o"]
           ]
 var doneMsg = ""
-let computerMove = "o"
-let humanMove = "x"
+let computerMove = "x"
+let humanMove = "o"
 if xo[0][0] == "."{
     xo[0][0] = computerMove
     doneMsg = "done"
@@ -21,21 +20,21 @@ if xo[0][0] == "."{
     xo[2][0] = computerMove
     doneMsg = "done"
 }
-
+//horizontal
 if doneMsg == "" {
-    for i in 0..<xo.count{
-        let countOfOInHorizontal = xo[i].filter{ $0.contains(computerMove) }
-        let countOfXInHorizontal = xo[i].filter{ $0.contains(humanMove) }
-        let countOfDotInHorizontal = xo[i].filter{ $0.contains(".") }
+    for horizontal in 0..<xo.count{
+        let countOfOInHorizontal = xo[horizontal].filter{ $0.contains(computerMove) }
+        let countOfXInHorizontal = xo[horizontal].filter{ $0.contains(humanMove) }
+        let countOfDotInHorizontal = xo[horizontal].filter{ $0.contains(".") }
         if countOfOInHorizontal.count == 2 , countOfDotInHorizontal.count == 1{
             print("HUMAN LOST TO AI")
-            var indexValue = xo[i].index(of: ".") ?? 4
-            xo[i][indexValue] = computerMove
+            var indexValue = xo[horizontal].index(of: ".") ?? 4
+            xo[horizontal][indexValue] = computerMove
             doneMsg = "done"
             break
         } else if countOfXInHorizontal.count == 2 , countOfDotInHorizontal.count == 1 {
-            var indexValue = xo[i].index(of: ".") ?? 4
-            xo[i][indexValue] = computerMove
+            var indexValue = xo[horizontal].index(of: ".") ?? 4
+            xo[horizontal][indexValue] = computerMove
             doneMsg = "done"
             break
         } else if countOfXInHorizontal.count == 3 {
@@ -47,20 +46,20 @@ if doneMsg == "" {
     }
 //vertical...
 if doneMsg == "" {
-    for i in 0..<xo.count{
-        let arrayOfVertical = [xo[0][i],xo[1][i],xo[2][i]]
+    for vertical in 0..<xo.count{
+        let arrayOfVertical = [xo[0][vertical],xo[1][vertical],xo[2][vertical]]
         var countOfOInVertical = arrayOfVertical.filter{ $0.contains(computerMove) }
         var countOfXInVertical = arrayOfVertical.filter{ $0.contains(humanMove) }
         var countOfDotInVertical = arrayOfVertical.filter{ $0.contains(".") }
         if countOfOInVertical.count == 2 , countOfDotInVertical.count == 1{
             print("HUMAN LOST TO AI")
             var indexValue = arrayOfVertical.index(of: ".") ?? 4
-            xo[indexValue][i] = computerMove
+            xo[indexValue][vertical] = computerMove
             doneMsg = "done"
             break
         } else if countOfXInVertical.count == 2 , countOfDotInVertical.count == 1 {
             var indexValue = arrayOfVertical.index(of: ".") ?? 4
-            xo[indexValue][i] = computerMove
+            xo[indexValue][vertical] = computerMove
             doneMsg = "done"
             break
         } else if countOfXInVertical.count == 3 {
@@ -74,9 +73,9 @@ if doneMsg == "" {
 if doneMsg == "" {
     var diagonal1 = [String]()
     var diagonal2 = [String]()
-    for i in 0..<xo.count{
-        diagonal1.append(xo[i][i])
-        diagonal2.append(xo[(xo.count - i)-1] [i])
+    for diagonal in 0..<xo.count{
+        diagonal1.append(xo[diagonal][diagonal])
+        diagonal2.append(xo[(xo.count - diagonal)-1] [diagonal])
     }
     var countOfOIndiagonal1 = diagonal1.filter{ $0.contains(computerMove) }
     var countOfXIndiagonal1 = diagonal1.filter{ $0.contains(humanMove) }
@@ -119,6 +118,8 @@ if doneMsg == "" {
         xo[2][2] = computerMove
     } else if xo[1][1] == "."{
         xo[1][1] = computerMove
+    } else {
+        print("draw")
     }
 }
 for k in xo{
