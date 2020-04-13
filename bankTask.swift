@@ -11,7 +11,7 @@ import Foundation
 func compoundInterest(amount: Double, monthsOfTenure: Double, rateOfIntertrest: Double) -> (Double){
     var totalInterestToPay: Double = 0
     var duplicateAmount: Double = amount
-    for i in 0..<Int(monthsOfTenure) {
+    for each in 0..<Int(monthsOfTenure) {
         let interestToPay: Double = Double((duplicateAmount * rateOfIntertrest) / (12 * 100))
         totalInterestToPay += interestToPay
         duplicateAmount += interestToPay
@@ -26,19 +26,22 @@ let bankBalance: Double = 1000000000
 // loan tenure : example 1 year 2 months, so months = 2 and years = 2 
 let years: Double = 0
 let months: Double = 120
-var monthsOfTenure: Double = months + (years * 12)
-var loanAmount: Double = 2500000
-var isItCompoundInterest = "yes" // YES or NO
+let monthsOfTenure: Double = months + (years * 12)
+let loanAmount: Double = 2500000
+let isItCompoundInterest = "yEs" // YES or NO
 if loanAmount <= bankBalance {
-    if isItCompoundInterest == "yes" {
-        let ans = compoundInterest(amount: Double(loanAmount), monthsOfTenure: monthsOfTenure, rateOfIntertrest: 14)
-        print("interest will be paid by the Person X is \(ans)")
-        print("Banks’s balance \(bankBalance + ans )")
-    } else if  isItCompoundInterest == "no"{
+    if isItCompoundInterest.lowercased() == "yes" {
+        let totalInterestToPay = compoundInterest(amount: Double(loanAmount), monthsOfTenure: monthsOfTenure, rateOfIntertrest: 14)
+        print("interest will be paid by the Person X is \(totalInterestToPay)")
+        print("Banks’s balance \(bankBalance + totalInterestToPay )")
+        print("Totalamount Need to pay by x is \(loanAmount + totalInterestToPay)")
+    } else if  isItCompoundInterest.lowercased() == "no"{
         let totalInterestToPay = simpleInterest(amount: loanAmount, monthsOfTenure: monthsOfTenure, rateOfIntertrest: 14)
         print("interest will be paid by the Person X is \(totalInterestToPay)")
         print("Totalamount Need to pay by x is \(totalInterestToPay + loanAmount)")
         print("Banks’s balance \(bankBalance + totalInterestToPay )")
+    } else {
+        print("YOU made mistake at isItCompoundInterest")
     }
 } else {
     print("NO Amount in bank")
