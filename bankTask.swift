@@ -1,7 +1,5 @@
 /*There’s bank in the name of Ivy Bank. Bank’s Balance 100,00,00,000.
-
 Person X has an account in Ivy Bank. His/her account number is XXXXXXXXXX.
-
 And Person X taken a loan amount of 25,00,000 for an interest rate of 14% and the loan tenure is 120 months. 
 Every month interest has to be recalculated from the principal amount. At the end of 120 month, 
 how much interest will be paid by the Person X.
@@ -24,19 +22,20 @@ func simpleInterest(amount: Double, monthsOfTenure: Double, rateOfIntertrest: Do
 }
 let bankBalance: Double = 1000000000
 // loan tenure : example 1 year 2 months, so months = 2 and years = 2 
-let years: Double = 0
-let months: Double = 120
+let years: Double = 1
+let months: Double = 0
 let monthsOfTenure: Double = months + (years * 12)
 let loanAmount: Double = 2500000
-let isItCompoundInterest = "yEs" // YES or NO
+let isItCompoundInterest = "no" // YES or NO
+let rateOfIntertrestPerYear: Double = 14 
 if loanAmount <= bankBalance {
     if isItCompoundInterest.lowercased() == "yes" {
-        let totalInterestToPay = compoundInterest(amount: Double(loanAmount), monthsOfTenure: monthsOfTenure, rateOfIntertrest: 14)
+        let totalInterestToPay = compoundInterest(amount: Double(loanAmount), monthsOfTenure: monthsOfTenure, rateOfIntertrest: rateOfIntertrestPerYear)
         print("interest will be paid by the Person X is \(totalInterestToPay)")
         print("Banks’s balance \(bankBalance + totalInterestToPay )")
         print("Totalamount Need to pay by x is \(loanAmount + totalInterestToPay)")
     } else if  isItCompoundInterest.lowercased() == "no"{
-        let totalInterestToPay = simpleInterest(amount: loanAmount, monthsOfTenure: monthsOfTenure, rateOfIntertrest: 14)
+        let totalInterestToPay = simpleInterest(amount: loanAmount, monthsOfTenure: monthsOfTenure, rateOfIntertrest: rateOfIntertrestPerYear)
         print("interest will be paid by the Person X is \(totalInterestToPay)")
         print("Totalamount Need to pay by x is \(totalInterestToPay + loanAmount)")
         print("Banks’s balance \(bankBalance + totalInterestToPay )")
