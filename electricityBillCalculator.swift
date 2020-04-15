@@ -1,18 +1,19 @@
 import Foundation
-let unit = 500
+let unit = 480
 func amountCal(unit: Int) -> Void {
     if unit <= 100{
         let value: Double = (Double ( unit) * 1.50)
         print(value)
     } else if unit <= 200{
-        let value: Double = (Double ( unit) *  1.50) + 20
+        let value: Double = (Double ( unit) *  1.50) + 20.0
         print(value)
     } else if unit <= 500{
-        let value: Double = (100.0 * 1.50) + (99.0 * 2.0) + ( Double(unit - 200) * 3.00) + 30
-        print(value)
+        let value: Double = (100.0 * 1.50) + (100.0 * 2.0) + ( Double(unit - 200) * 3.00)
+        print(unit - 200)
+        print(value + 30.0)
     } else if unit > 500{
-         let value: Double = (100.0 * 1.50) + (99.0 * 3.50) + ( Double( 500 - 201) * 4.60) + (Double (abs(unit - 500 )) * 6.60) + 50
-         print(value)
+         let value: Double = (100.0 * 1.50) + (100.0 * 3.50) + (300  * 4.60) + (Double (abs(unit - 500 )) * 6.60) 
+         print(value  + 50.0)
     }
 }
 func amountForCommercial(unit: Int) -> Void{
