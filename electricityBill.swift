@@ -5,17 +5,28 @@ For next 100 units Rs 3.50/unit
 For next 300 units Rs 4.60/unit
 For unit above 500  Rs 6.60/unit
 Fixed charges for two months Rs.50/service
-
 For Commercial
 For first 100 units Rs 5.00/unit
 Consumption above 100 units bi monthly 8.05/unit
 Fixed charges for two months Rs.290/service
-
 Get random numbers as daily consumable units. For domestic random number generation should be in between 1 - 10. For commercial 10 - 100
 */
 
 import Foundation
-var units = 222
+func amountCalculation(unit: Int, rate: Double) -> (Double){
+    return Double(unit) * rate
+}
+func randomUnit() -> (Int){
+    var perDayUnitFortwoMonth = [Int]()
+    for eachday in 0..<60
+    {
+        let perDayUnit = Int.random(in:10...100)
+    perDayUnitFortwoMonth.append(perDayUnit)
+    }
+    let units = perDayUnitFortwoMonth.reduce(0, +)
+    return units
+}
+var units = randomUnit()
 var amount:Double = 0
 let stageOneRateForDomestic: Double = 0
 let stageTwoRateForDomestic: Double = 3.50
@@ -26,9 +37,6 @@ let stageTwoRateForCommercial: Double = 8.05
 let fixedServiceChargeForDomestic: Double = 50
 let fixedServiceChargeForCommercial: Double = 290
 let choice = 2 // 1 ForDomestic , 2 ForCommercial
-func amountCalculation(unit: Int, rate: Double) -> (Double){
-    return Double(unit) * rate
-}
 if choice == 1{
     if units > 0{
         if units < 100 {
