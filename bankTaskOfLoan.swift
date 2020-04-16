@@ -7,26 +7,20 @@ how much interest will be paid by the Person X.
 */
 import Foundation
 func compoundInterest(amount: Double, monthsOfTenure: Double, rateOfIntertrest: Double) -> (Double){
-    var totalInterestToPay: Double = 0
-    var duplicateAmount: Double = amount
-    for each in 0..<Int(monthsOfTenure) {
-        let interestToPay: Double = Double((duplicateAmount * rateOfIntertrest) / (12 * 100))
-        totalInterestToPay += interestToPay
-        duplicateAmount += interestToPay
-    }
+   let totalInterestToPay = amount * (pow((1 + rateOfIntertrest / 100),(monthsOfTenure / 12)))
     return (totalInterestToPay)
 }
 func simpleInterest(amount: Double, monthsOfTenure: Double, rateOfIntertrest: Double) -> (Double){
    let totalInterestToPay: Double =  amount * (rateOfIntertrest / 100 ) * (monthsOfTenure / 12) 
    return totalInterestToPay
 }
-let bankBalance: Double = 1000000000
+let bankBalance: Double = 1000000000000000
 // loan tenure : example 1 year 2 months, so months = 2 and years = 2 
 let years: Double = 1
 let months: Double = 0
 let monthsOfTenure: Double = months + (years * 12)
 let loanAmount: Double = 2500000
-let isItCompoundInterest = "no" // YES or NO
+let isItCompoundInterest = "Yes" // YES or NO
 let rateOfIntertrestPerYear: Double = 14 
 if loanAmount <= bankBalance {
     if isItCompoundInterest.lowercased() == "yes" {
