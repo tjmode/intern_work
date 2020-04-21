@@ -12,11 +12,21 @@ Fixed charges for two months Rs.290/service
 Get random numbers as daily consumable units. For domestic random number generation should be in between 1 - 10. For commercial 10 - 100
 */
 import Foundation
-func amountCalculation(unitsAndRate: Dictionary<Double, Double>,fixedCharges: Double ) -> Void{
+func randomUnitCalculation() -> (Int) {
+    var perDayUnitFortwoMonth = [Int]()
+    for eachday in 0..<60
+    {
+        let perDayUnit = Int.random(in:10...100)
+    perDayUnitFortwoMonth.append(perDayUnit)
+    }
+    let units = perDayUnitFortwoMonth.reduce(0, +)
+    return units
+}
+func amountCalculation(unitsAndRate: Dictionary<Double, Double>,fixedCharges: Double ) -> Void {
     let orderedUnits = Array(unitsAndRate.keys).sorted(by: <)
-    var units: Double = 507
+    var units = Double(randomUnitCalculation())
     var amount: Double = 0
-    for key in 0..<orderedUnits.count{
+    for key in 0..<orderedUnits.count {
         if key == 0 {
             if units < orderedUnits[key] {
                amount += units * (unitsAndRate[orderedUnits[key]]  ?? 0)
@@ -41,7 +51,7 @@ func amountCalculation(unitsAndRate: Dictionary<Double, Double>,fixedCharges: Do
     }
     print(amount + fixedCharges)
 }
-enum category{
+enum category {
     case domestic
     case commercial
 }
