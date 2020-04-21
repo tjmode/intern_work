@@ -12,19 +12,18 @@ Fixed charges for two months Rs.290/service
 Get random numbers as daily consumable units. For domestic random number generation should be in between 1 - 10. For commercial 10 - 100
 */
 import Foundation
-func randomUnitCalculation() -> (Int) {
+func randomUnitCalculation(startRangeForRandomCalulation: Int, endRangeForRandomCalulation: Int) -> (Int) {
     var perDayUnitFortwoMonth = [Int]()
-    for eachday in 0..<60
-    {
-        let perDayUnit = Int.random(in:10...100)
-    perDayUnitFortwoMonth.append(perDayUnit)
+    for eachday in 0..<60 {
+        let perDayUnit = Int.random(in:startRangeForRandomCalulation...endRangeForRandomCalulation)
+        perDayUnitFortwoMonth.append(perDayUnit)
     }
     let units = perDayUnitFortwoMonth.reduce(0, +)
     return units
 }
-func amountCalculation(unitsAndRate: Dictionary<Double, Double>,fixedCharges: Double ) -> Void {
+func amountCalculation(unitsAndRate: Dictionary<Double, Double>,fixedCharges: Double, startRangeForRandomCalulation: Int, endRangeForRandomCalulation: Int) -> Void {
     let orderedUnits = Array(unitsAndRate.keys).sorted(by: <)
-    var units = Double(randomUnitCalculation())
+    var units = Double(randomUnitCalculation(startRangeForRandomCalulation: startRangeForRandomCalulation, endRangeForRandomCalulation: endRangeForRandomCalulation))
     var amount: Double = 0
     for key in 0..<orderedUnits.count {
         if key == 0 {
@@ -49,20 +48,16 @@ func amountCalculation(unitsAndRate: Dictionary<Double, Double>,fixedCharges: Do
             }
         }
     }
-    print(amount + fixedCharges)
+    print("amount for two months \(amount + fixedCharges)")
 }
-enum category {
+enum electricBillCategory {
     case domestic
     case commercial
 }
-let selectedCategory: category = .domestic
+let selectedCategory: electricBillCategory = .domestic
 switch selectedCategory {
 case .domestic:
-        let unitsAndRate:[Double: Double] = [100: 0, 200: 3.50, 500: 4.60, 501: 6.60]
-        let fixedCharges: Double = 50
-        amountCalculation(unitsAndRate: unitsAndRate, fixedCharges: fixedCharges)
+        amountCalculation(unitsAndRate: [100: 0, 200: 3.50, 500: 4.60, 501: 6.60], fixedCharges: 50, startRangeForRandomCalulation: 1, endRangeForRandomCalulation: 100)
 case .commercial:
-        let unitsAndRate:[Double: Double] = [100: 5.00, 200: 8.05]
-        let fixedCharges: Double = 290
-        amountCalculation(unitsAndRate: unitsAndRate, fixedCharges: fixedCharges)
+        amountCalculation(unitsAndRate:[100: 5.00, 200: 8.05], fixedCharges: 290, startRangeForRandomCalulation: 10, endRangeForRandomCalulation: 100)
 }
