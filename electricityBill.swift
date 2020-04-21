@@ -11,83 +11,48 @@ Consumption above 100 units bi monthly 8.05/unit
 Fixed charges for two months Rs.290/service
 Get random numbers as daily consumable units. For domestic random number generation should be in between 1 - 10. For commercial 10 - 100
 */
-
 import Foundation
-func amountCalculation(unit: Int, rate: Double) -> (Double){
-    return Double(unit) * rate
+func amountCalculation(unitsAndRate: Dictionary<Double, Double>,fixedCharges: Double ) -> Void{
+    let orderedUnits = Array(unitsAndRate.keys).sorted(by: <)
+    var units: Double = 507
+    var amount: Double = 0
+    for key in 0..<orderedUnits.count{
+        if key == 0 {
+            if units < orderedUnits[key] {
+               amount += units * (unitsAndRate[orderedUnits[key]]  ?? 0)
+                break
+            } else {
+                amount += (orderedUnits[key] * (unitsAndRate[orderedUnits[key]]  ?? 0))
+                units = units - orderedUnits[key] ?? 0
+            }
+
+        } else if key == orderedUnits.count-1 {
+            amount += units * (unitsAndRate[orderedUnits[key]]  ?? 0)
+            break
+        } else {
+            if units < orderedUnits[key]  - orderedUnits[key - 1]  {
+               amount += (units * (unitsAndRate[orderedUnits[key]]  ?? 0))
+                break
+            } else {
+                amount += (orderedUnits[key] - orderedUnits[key - 1]) * (unitsAndRate[orderedUnits[key]]  ?? 0)
+                units = units - (orderedUnits[key] - orderedUnits[key - 1])
+            }
+        }
+    }
+    print(amount + fixedCharges)
 }
-func randomUnit() -> (Int){
-    var perDayUnitFortwoMonth = [Int]()
-    for eachday in 0..<60
-    {
-        let perDayUnit = Int.random(in:10...100)
-    perDayUnitFortwoMonth.append(perDayUnit)
-    }
-    let units = perDayUnitFortwoMonth.reduce(0, +)
-    return units
+enum category{
+    case domestic
+    case commercial
 }
-var units = randomUnit()
-var amount:Double = 0
-let stageOneRateForDomestic: Double = 0
-let stageTwoRateForDomestic: Double = 3.50
-let stageThreeRateForDomestic: Double = 4.60
-let stageFourRateForDomestic: Double = 6.60
-let stageOneRateForCommercial: Double = 5.00
-let stageTwoRateForCommercial: Double = 8.05
-let fixedServiceChargeForDomestic: Double = 50
-let fixedServiceChargeForCommercial: Double = 290
-let choice = 2 // 1 ForDomestic , 2 ForCommercial
-if choice == 1{
-    if units > 0{
-        if units < 100 {
-            var amountGeting = amountCalculation(unit: units, rate:stageOneRateForDomestic)
-            amount += amountGeting
-        } else {
-            var amountGeting = amountCalculation(unit: 100, rate:stageOneRateForDomestic)
-            amount += amountGeting
-        }
-        units = units - 100
-    } 
-    if units > 0 {
-        if units < 100 {
-            var amountGeting = amountCalculation(unit: units, rate:stageTwoRateForDomestic)
-            amount += amountGeting
-        } else {
-            var amountGeting = amountCalculation(unit: 100, rate:stageTwoRateForDomestic)
-            amount += amountGeting
-        }
-        units = units - 100
-    }
-    if units > 0 {
-         if units < 300 {
-            var amountGeting = amountCalculation(unit: units, rate:stageThreeRateForDomestic)
-            amount += amountGeting
-        } else {
-            var amountGeting = amountCalculation(unit: 300, rate:stageThreeRateForDomestic)
-            amount += amountGeting
-        }
-        units = units - 300
-    }
-    if units > 0 {
-        var amountGeting = amountCalculation(unit: units, rate:stageFourRateForDomestic)
-        amount += amountGeting
-    }
-    print(amount + fixedServiceChargeForDomestic)
-}
-if choice == 2 {
-    if units > 0 {
-            if units < 100 {
-            var amountGeting = amountCalculation(unit: units, rate:stageOneRateForCommercial)
-            amount += amountGeting
-        } else {
-            var amountGeting = amountCalculation(unit: 100, rate:stageOneRateForCommercial)
-            amount += amountGeting
-        }
-        units = units - 100
-    }
-    if units > 0{
-        var amountGeting = amountCalculation(unit: units, rate:stageTwoRateForCommercial)
-        amount += amountGeting   
-    }
-    print(amount + fixedServiceChargeForCommercial)
+let selectedCategory: category = .domestic
+switch selectedCategory {
+case .domestic:
+        let unitsAndRate:[Double: Double] = [100: 0, 200: 3.50, 500: 4.60, 501: 6.60]
+        let fixedCharges: Double = 50
+        amountCalculation(unitsAndRate: unitsAndRate, fixedCharges: fixedCharges)
+case .commercial:
+        let unitsAndRate:[Double: Double] = [100: 5.00, 200: 8.05]
+        let fixedCharges: Double = 290
+        amountCalculation(unitsAndRate: unitsAndRate, fixedCharges: fixedCharges)
 }
