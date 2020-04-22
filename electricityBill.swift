@@ -57,7 +57,7 @@ enum electricBillCategory {
 let selectedCategory: electricBillCategory = .domestic
 switch selectedCategory {
 case .domestic:
-        amountCalculation(unitsAndRate: [100: 0, 200: 3.50, 500: 4.60, 501: 6.60], fixedCharges: 50, startRangeForRandomCalulation: 1, endRangeForRandomCalulation: 100)
+        amountCalculation(unitsAndRate: [100: 0, 200: 3.50, 500: 4.60, 501: 6.60], fixedCharges: 50, startRangeForRandomCalulation: 1, endRangeForRandomCalulation: 10)
 case .commercial:
         amountCalculation(unitsAndRate:[100: 5.00, 200: 8.05], fixedCharges: 290, startRangeForRandomCalulation: 10, endRangeForRandomCalulation: 100)
 }
