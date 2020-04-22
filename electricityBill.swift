@@ -21,9 +21,9 @@ func randomUnitCalculation(startRangeForRandomCalulation: Int, endRangeForRandom
     let units = perDayUnitFortwoMonth.reduce(0, +)
     return units
 }
-func amountCalculation(unitsAndRate: Dictionary<Double, Double>,fixedCharges: Double, startRangeForRandomCalulation: Int, endRangeForRandomCalulation: Int) -> Void {
+func amountCalculation(unitsAndRate: Dictionary<Double, Double>,fixedCharges: Double, unit: Int) -> Void {
     let orderedUnits = Array(unitsAndRate.keys).sorted(by: <)
-    var units = Double(randomUnitCalculation(startRangeForRandomCalulation: startRangeForRandomCalulation, endRangeForRandomCalulation: endRangeForRandomCalulation))
+    var units = Double(unit)
     var amount: Double = 0
     for key in 0..<orderedUnits.count {
         if key == 0 {
@@ -57,7 +57,7 @@ enum electricBillCategory {
 let selectedCategory: electricBillCategory = .domestic
 switch selectedCategory {
 case .domestic:
-        amountCalculation(unitsAndRate: [100: 0, 200: 3.50, 500: 4.60, 501: 6.60], fixedCharges: 50, startRangeForRandomCalulation: 1, endRangeForRandomCalulation: 10)
+        amountCalculation(unitsAndRate: [100: 0, 200: 3.50, 500: 4.60, 501: 6.60], fixedCharges: 50, unit: randomUnitCalculation(startRangeForRandomCalulation: 1, endRangeForRandomCalulation: 10))
 case .commercial:
-        amountCalculation(unitsAndRate:[100: 5.00, 200: 8.05], fixedCharges: 290, startRangeForRandomCalulation: 10, endRangeForRandomCalulation: 100)
+        amountCalculation(unitsAndRate:[100: 5.00, 200: 8.05], fixedCharges: 290,  unit: randomUnitCalculation(startRangeForRandomCalulation: 10, endRangeForRandomCalulation: 100))
 }
