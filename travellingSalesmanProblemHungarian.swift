@@ -18,15 +18,17 @@ extension Array {
     }
 }
 
-var permutations = [1, 2].permutations // places and don't put the starting place 
-let inputs = [[nil,2,3],[1,nil,3],[1,2,nil]]
+var permutations = [1, 2, 3].permutations // places and don't put the starting place 
+let inputs = [[nil,2.4,6.8,4.7],[2.4,nil,6,5.1],[6.8,6,nil,5.9,],[4.7,5.1,5.9,nil]]
 let permutationNumber = 2
 for each in permutations {
     var startValue = 0 // starting place 
-    var ans = 0
+    let endPlace = 0 //
+    var ans: Double = 0
     for i in each {
        ans += inputs[startValue][i] ?? 0
        startValue = i
     }
-    print(ans)
+    print(ans + (inputs[startValue][endPlace] ?? 0) )
+    print(each)
 }
