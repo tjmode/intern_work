@@ -1,3 +1,31 @@
+//import Foundation
+// var c = 0
+// var permutations = [[Int]]()
+// let totalNumberOfpermutations = 6
+// var places = [1,2,3]
+// let countOfPlacesArray = places.count 
+// var mappingValueIndex = 0
+// while c == 0 {
+//     if permutations.count != totalNumberOfpermutations {
+//         let valueToBeMapped = places.remove(at: mappingValueIndex)
+//         var c1 = 0
+//         var permutedArrays = [Int]()
+//         for replace in 0..<countOfPlacesArray  {
+//             permutedArrays = places
+//             permutedArrays.insert(valueToBeMapped, at: c1 )
+//             let avoidDuplicate = permutations.contains { $0 == permutedArrays }
+//             if avoidDuplicate == false {
+//                 permutations.append(permutedArrays)
+//             }
+//         }
+//         mappingValueIndex += 1
+//     } else if permutations.count == 6 {
+//         c = 1
+//     }
+// // }
+// // print(permutations)
+// var s = [[1,2],[2,3]]
+// print(s.count)
 import Foundation
 extension Array {
     func chopped() -> (Element, [Element])? {
